@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Json Tutorial</title>
+  </head>
+  <body>
+    <ul id="personas"></ul>
+
+    <script>
+
+
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var respuesta = JSON.parse(xhttp.responseText);
+          var personas = respuesta.personas;
+
+          var salida = '';
+
+          for(var i = 0; i < personas.length; i++) {
+            salida += `<li>${personas[i].Nombre} su Edad es ${personas[i].Edad}</li>`;
+          }
+
+          document.getElementById('personas')
+            .innerHTML = salida;
+
+        }
+      };
+      xhttp.open("GET", "personas.json", true);
+      xhttp.send();
+
+    </script>
+
+  </body>
+</html>
